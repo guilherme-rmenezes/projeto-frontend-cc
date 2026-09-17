@@ -376,7 +376,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   margin: 0 0 1.25rem;
   color: var(--branco);
 }
-.depoimento cite{
+.depoimento footer{
   font-style: normal;
   color: var(--dourado-claro);
   font-weight: 600;
