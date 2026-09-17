@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seja voluntário do Instituto Semear</title>
+  <meta name="description" content="Cadastre-se como voluntário do Instituto Semear e ajude a levar segurança alimentar, educação e cuidado a comunidades do Rio Grande do Sul.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="link-pulo" href="#conteudo-principal">Pular para o conteúdo</a>
+
+  <header class="cabecalho">
+    <div class="container barra-nav">
+      <a class="marca" href="index.html">
+        <span class="marca__semente" aria-hidden="true">🌱</span>
+        <span class="marca__nome">Instituto <em>Semear</em></span>
+      </a>
+
+      <button class="alterna-nav" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menu de navegação">
+        <span></span>
+      </button>
+
+      <nav class="nav-principal" id="nav-principal" aria-label="Navegação principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="projetos.html">Iniciativas</a></li>
+          <li><a href="cadastro.html" aria-current="page">Seja voluntário</a></li>
+        </ul>
+      </nav>
+
+      <a class="botao botao--dourado" href="cadastro.html">Quero ajudar</a>
+    </div>
+  </header>
+
+  <main id="conteudo-principal">
+
+    <section class="pagina-cadastro-hero">
+      <div class="container">
+        <h1>Faça parte do Semear</h1>
+        <p>Preencha o formulário abaixo para se cadastrar como voluntário ou voluntária. Todos os campos marcados com <strong>*</strong> são obrigatórios. Seus dados são usados apenas para contato do Instituto Semear, conforme a LGPD.</p>
+      </div>
+    </section>
+
+    <section class="secao" style="padding-top:0;">
+      <form class="formulario-envolvimento" id="formulario-voluntario" novalidate autocomplete="on">
+
+        <!-- DADOS PESSOAIS -->
+        <fieldset>
+          <legend>Dados pessoais</legend>
+
+          <div class="campo">
+            <label for="nome">Nome completo *</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              autocomplete="name"
+              required
+              minlength="5"
+              maxlength="120"
+              placeholder="Como você gostaria de ser chamado(a)"
+              aria-describedby="erro-nome">
+            <p class="campo__erro" id="erro-nome">Informe seu nome completo (mínimo 5 caracteres).</p>
+          </div>
+
+          <div class="campo campo--dupla">
+            <div>
+              <label for="data-nascimento">Data de nascimento *</label>
+              <input
+                type="date"
+                id="data-nascimento"
+                name="data_nascimento"
+                autocomplete="bday"
+                required
+                max="2010-09-09"
+                min="1930-01-01"
+                aria-describedby="erro-nascimento">
+              <p class="campo__erro" id="erro-nascimento">É preciso ter 16 anos ou mais para se voluntariar.</p>
+            </div>
+            <div>
+              <label for="cpf">CPF *</label>
+              <input
+                type="text"
+                id="cpf"
+                name="cpf"
+                inputmode="numeric"
+                autocomplete="off"
+                required
+                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                maxlength="14"
+                placeholder="000.000.000-00"
+                aria-describedby="erro-cpf ok-cpf">
+              <p class="campo__erro" id="erro-cpf">CPF inválido. Use o formato 000.000.000-00.</p>
+              <p class="campo__ok" id="ok-cpf">CPF válido.</p>
+            </div>
+          </div>
+
+          <div class="campo campo--dupla">
+            <div>
+              <label for="email">E-mail *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                placeholder="voce@exemplo.com"
+                aria-describedby="erro-email">
+              <p class="campo__erro" id="erro-email">Informe um e-mail válido.</p>
+            </div>
+            <div>
+              <label for="telefone">Telefone / WhatsApp *</label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                inputmode="numeric"
+                autocomplete="tel"
+                required
+                pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                maxlength="15"
+                placeholder="(00) 00000-0000"
+                aria-describedby="erro-telefone">
+              <p class="campo__erro" id="erro-telefone">Informe um telefone válido com DDD.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ENDEREÇO -->
+        <fieldset>
+          <legend>Endereço</legend>
+
+          <div class="campo campo--dupla">
+            <div>
+              <label for="cep">CEP *</label>
+              <input
+                type="text"
+                id="cep"
+                name="cep"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                required
+                pattern="\d{5}-\d{3}"
+                maxlength="9"
+                placeholder="00000-000"
+                aria-describedby="ajuda-cep erro-cep">
+              <p class="campo__ajuda" id="ajuda-cep">Ao sair do campo, tentamos preencher cidade e bairro automaticamente.</p>
+              <p class="campo__erro" id="erro-cep">Informe um CEP válido no formato 00000-000.</p>
+            </div>
+            <div>
+              <label for="cidade">Cidade *</label>
+              <input
+                type="text"
+                id="cidade"
+                name="cidade"
+                autocomplete="address-level2"
+                required
+                placeholder="Sua cidade"
+                aria-describedby="erro-cidade">
+              <p class="campo__erro" id="erro-cidade">Informe sua cidade.</p>
+            </div>
+          </div>
+
+          <div class="campo campo--tripla">
+            <div>
+              <label for="endereco">Rua / Logradouro *</label>
+              <input
+                type="text"
+                id="endereco"
+                name="endereco"
+                autocomplete="address-line1"
+                required
+                placeholder="Nome da rua"
+                aria-describedby="erro-endereco">
+              <p class="campo__erro" id="erro-endereco">Informe o nome da rua.</p>
+            </div>
+            <div>
+              <label for="numero">Número *</label>
+              <input
+                type="text"
+                id="numero"
+                name="numero"
+                inputmode="numeric"
+                autocomplete="address-line2"
+                required
+                maxlength="8"
+                placeholder="123"
+                aria-describedby="erro-numero">
+              <p class="campo__erro" id="erro-numero">Informe o número.</p>
+            </div>
+            <div>
+              <label for="bairro">Bairro *</label>
+              <input
+                type="text"
+                id="bairro"
+                name="bairro"
+                autocomplete="address-level3"
+                required
+                placeholder="Seu bairro"
+                aria-describedby="erro-bairro">
+              <p class="campo__erro" id="erro-bairro">Informe seu bairro.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ENVOLVIMENTO -->
+        <fieldset>
+          <legend>Como você quer ajudar</legend>
+
+          <div class="campo">
+            <label id="rotulo-areas">Área de interesse * <span class="opcional">(selecione ao menos uma)</span></label>
+            <div class="grupo-checkbox" role="group" aria-labelledby="rotulo-areas">
+              <label class="opcao-checkbox">
+                <input type="checkbox" name="areas" value="horta-comunitaria">
+                Horta Comunitária
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" name="areas" value="prato-cheio">
+                Prato Cheio
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" name="areas" value="escola-de-oficios">
+                Escola de Ofícios
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" name="areas" value="apadrinhamento">
+                Apadrinhamento Sementinha
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" name="areas" value="administrativo">
+                Apoio administrativo
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" name="areas" value="eventos">
+                Eventos e captação
+              </label>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="disponibilidade">Disponibilidade *</label>
+            <select id="disponibilidade" name="disponibilidade" required aria-describedby="erro-disponibilidade">
+              <option value="" selected disabled>Selecione um período</option>
+              <option value="manha">Manhãs</option>
+              <option value="tarde">Tardes</option>
+              <option value="noite">Noites</option>
+              <option value="fim-de-semana">Fins de semana</option>
+              <option value="flexivel">Horário flexível</option>
+            </select>
+            <p class="campo__erro" id="erro-disponibilidade">Selecione um período de disponibilidade.</p>
+          </div>
+
+          <div class="campo">
+            <label for="mensagem">Conte um pouco sobre você <span class="opcional">(opcional)</span></label>
+            <textarea
+              id="mensagem"
+              name="mensagem"
+              maxlength="500"
+              placeholder="Experiências anteriores, habilidades ou o que te motivou a se voluntariar"></textarea>
+          </div>
+
+          <div class="campo-termos">
+            <input type="checkbox" id="termos" name="termos" required aria-describedby="erro-termos">
+            <label for="termos">Li e concordo com o uso dos meus dados de acordo com a Lei Geral de Proteção de Dados (LGPD) e com a Política de Privacidade do Instituto Semear. *</label>
+          </div>
+          <p class="campo__erro" id="erro-termos" style="margin-top:0.5rem;">É necessário aceitar os termos para enviar o cadastro.</p>
+        </fieldset>
+
+        <button type="submit" class="botao botao--principal">Enviar cadastro</button>
+
+        <p class="mensagem-envio" id="mensagem-envio" role="status"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <div>
+        <h4>Instituto Semear</h4>
+        <p>Organização da sociedade civil de interesse público (OSCIP) sediada em Eldorado do Sul, RS, atuando em toda a região metropolitana de Porto Alegre.</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="projetos.html">Iniciativas</a></li>
+          <li><a href="cadastro.html">Seja voluntário</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="mailto:contato@institutosemear.org.br">contato@institutosemear.org.br</a></li>
+          <li><a href="tel:+555133330000">(51) 3333-0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__base">
+      <p>&copy; <span data-ano-atual>2026</span> Instituto Semear. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cadastro.js"></script>
+</body>
+</html>
