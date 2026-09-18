@@ -10,6 +10,98 @@ function inicializarCadastro() {
   if (!formulario) return;
 
   /* ----------------------------------------------------------
+     Persistência de rascunho no navegador (localStorage)
+     Salva o progresso do formulário a cada alteração, para não
+     perder o preenchimento se a aba fechar por engano. O campo
+     de aceite da LGPD (termos) nunca é restaurado automaticamente
+     por decisão de design: exigimos que a pessoa reconfirme o
+     consentimento a cada sessão de preenchimento.
+  ---------------------------------------------------------- */
+
+  var CHAVE_RASCUNHO = "institutoSemear:rascunhoCadastro";
+  var CAMPOS_TEXTO_RASCUNHO = [
+    "nome", "data_nascimento", "cpf", "email", "telefone",
+    "cep", "cidade", "endereco", "numero", "bairro",
+    "disponibilidade", "mensagem"
+  ];
+
+  function coletarDadosRascunho() {
+    var dados = {};
+    CAMPOS_TEXTO_RASCUNHO.forEach(function (nomeCampo) {
+      if (formulario.elements[nomeCampo]) dados[nomeCampo] = formulario.elements[nomeCampo].value;
+    });
+    dados.areas = Array.prototype.map.call(
+      formulario.querySelectorAll('input[name="areas"]:checked'),
+      function (input) { return input.value; }
+    );
+    return dados;
+  }
+
+  function salvarRascunho() {
+    try {
+      localStorage.setItem(CHAVE_RASCUNHO, JSON.stringify(coletarDadosRascunho()));
+    } catch (erro) {
+      // localStorage pode falhar (modo privado, quota excedida); a falha
+      // é silenciosa porque o auto-salvamento é uma conveniência, não um
+      // requisito para o formulário continuar funcionando.
+    }
+  }
+
+  function restaurarRascunho() {
+    var bruto;
+    try {
+      bruto = localStorage.getItem(CHAVE_RASCUNHO);
+    } catch (erro) {
+      return;
+    }
+    if (!bruto) return;
+
+    var dados;
+    try {
+      dados = JSON.parse(bruto);
+    } catch (erro) {
+      localStorage.removeItem(CHAVE_RASCUNHO);
+      return;
+    }
+
+    var restaurouAlgo = false;
+    CAMPOS_TEXTO_RASCUNHO.forEach(function (nomeCampo) {
+      if (dados[nomeCampo] && formulario.elements[nomeCampo]) {
+        formulario.elements[nomeCampo].value = dados[nomeCampo];
+        restaurouAlgo = true;
+      }
+    });
+    if (Array.isArray(dados.areas)) {
+      dados.areas.forEach(function (valor) {
+        var caixa = formulario.querySelector('input[name="areas"][value="' + valor + '"]');
+        if (caixa) { caixa.checked = true; restaurouAlgo = true; }
+      });
+    }
+
+    if (restaurouAlgo) {
+      var avisoRascunho = document.getElementById("aviso-rascunho");
+      if (avisoRascunho) avisoRascunho.style.display = "flex";
+    }
+  }
+
+  function limparRascunho() {
+    try { localStorage.removeItem(CHAVE_RASCUNHO); } catch (erro) { /* silencioso */ }
+    var avisoRascunho = document.getElementById("aviso-rascunho");
+    if (avisoRascunho) avisoRascunho.style.display = "none";
+  }
+
+  restaurarRascunho();
+  formulario.addEventListener("input", salvarRascunho);
+
+  var botaoDescartar = document.getElementById("descartar-rascunho");
+  if (botaoDescartar) {
+    botaoDescartar.addEventListener("click", function () {
+      formulario.reset();
+      limparRascunho();
+    });
+  }
+
+  /* ----------------------------------------------------------
      Utilidades de máscara
   ---------------------------------------------------------- */
 
@@ -223,6 +315,7 @@ function inicializarCadastro() {
     formulario.querySelectorAll(".campo--valido, .campo--invalido").forEach(function (envoltorio) {
       envoltorio.classList.remove("campo--valido", "campo--invalido");
     });
+    limparRascunho();
   });
 
   // Botão de fechar do toast
