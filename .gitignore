@@ -1,0 +1,13 @@
+# Dependências instaladas localmente (ex.: durante testes com npm)
+node_modules/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de editor
+.vscode/
+.idea/
+
+# Logs
+*.log
