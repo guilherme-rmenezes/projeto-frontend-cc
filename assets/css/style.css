@@ -242,11 +242,13 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .hero .container{
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: repeat(12, 1fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
   padding-block: clamp(3.5rem, 8vw, 6rem);
 }
+.hero__texto{ grid-column: span 7; }
+.hero__figura{ grid-column: span 5; }
 
 .hero__eyebrow{
   font-family: var(--fonte-display);
@@ -343,7 +345,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .iniciativa{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(12, 1fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
   padding-block: clamp(2.5rem, 6vw, 4rem);
@@ -353,6 +355,8 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .iniciativa:nth-of-type(even) .iniciativa__texto{ order: 2; }
 .iniciativa:nth-of-type(even) .iniciativa__visual{ order: 1; }
+.iniciativa__texto{ grid-column: span 6; }
+.iniciativa__visual{ grid-column: span 6; }
 
 .iniciativa__indice{
   font-family: var(--fonte-display);
@@ -432,11 +436,14 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   color: #C9C6BC;
 }
 .rodape .container{
-  padding-block: 3rem 2rem;
+  padding-block: var(--space-7) var(--space-6);
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-6);
 }
+.rodape .container > div:nth-child(1){ grid-column: span 5; }
+.rodape .container > div:nth-child(2){ grid-column: span 4; }
+.rodape .container > div:nth-child(3){ grid-column: span 3; }
 .rodape h4{ color: var(--areia-clara); font-family: var(--fonte-texto); font-size: 0.95rem; text-transform: none; margin-bottom: 0.9rem; }
 .rodape p{ color: #A6A398; font-size: 0.92rem; }
 .rodape ul{ list-style: none; margin: 0; padding: 0; }
@@ -493,15 +500,19 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .campo--dupla{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(12, 1fr);
   gap: var(--space-5);
 }
+.campo--dupla > div{ grid-column: span 6; }
 
 .campo--tripla{
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: repeat(12, 1fr);
   gap: var(--space-5);
 }
+.campo--tripla > div:nth-child(1){ grid-column: span 6; }
+.campo--tripla > div:nth-child(2){ grid-column: span 3; }
+.campo--tripla > div:nth-child(3){ grid-column: span 3; }
 
 .campo label{
   display: block;
@@ -628,15 +639,18 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 /* ---------- Responsivo ---------- */
 
-@media (max-width: 860px){
-  .hero .container{ grid-template-columns: 1fr; }
-  .hero__figura{ order: -1; max-width: 280px; margin-inline: auto; }
-  .iniciativa{ grid-template-columns: 1fr; }
-  .iniciativa:nth-of-type(even) .iniciativa__texto,
-  .iniciativa:nth-of-type(even) .iniciativa__visual{ order: 0; }
-  .rodape .container{ grid-template-columns: 1fr; }
+/* ---------- Responsivo: 5 breakpoints, do celular ao desktop panorâmico ---------- */
+
+/* 1) Celulares compactos (até 480px): ajustes finos de tipografia e botões */
+@media (max-width: 480px){
+  .hero__acoes{ flex-direction: column; align-items: stretch; }
+  .hero__acoes .botao{ text-align: center; justify-content: center; }
+  .estatistica__numero{ font-size: 1.9rem; }
+  .pilar{ grid-template-columns: 1fr; gap: var(--space-2); }
+  .pilar__marca{ padding-top: 0; }
 }
 
+/* 2) Celulares e tablets em retrato (até 700px): menu, formulário e listas empilham em 1 coluna */
 @media (max-width: 700px){
   .alterna-nav{ display: block; }
   .nav-principal{
@@ -660,7 +674,38 @@ p{ margin: 0 0 1em; max-width: 62ch; }
     border-bottom: 1px solid var(--borda);
   }
   .barra-nav .botao--dourado{ display: none; }
-  .campo--dupla, .campo--tripla{ grid-template-columns: 1fr; }
+  .campo--dupla > div{ grid-column: span 12; }
+  .campo--tripla > div:nth-child(1),
+  .campo--tripla > div:nth-child(2),
+  .campo--tripla > div:nth-child(3){ grid-column: span 12; }
   .grupo-checkbox{ grid-template-columns: 1fr; }
   .pilar{ grid-template-columns: 3rem 1fr; }
 }
+
+/* 3) Tablets em paisagem (até 860px): hero, iniciativas e rodapé empilham do grid de 12 colunas para 1 coluna */
+@media (max-width: 860px){
+  .hero__texto,
+  .hero__figura{ grid-column: span 12; }
+  .hero__figura{ order: -1; max-width: 280px; margin-inline: auto; }
+  .iniciativa__texto,
+  .iniciativa__visual{ grid-column: span 12; }
+  .iniciativa:nth-of-type(even) .iniciativa__texto,
+  .iniciativa:nth-of-type(even) .iniciativa__visual{ order: 0; }
+  .rodape .container > div:nth-child(1),
+  .rodape .container > div:nth-child(2),
+  .rodape .container > div:nth-child(3){ grid-column: span 12; }
+}
+
+/* 4) Desktops (a partir de 1024px): mais respiro entre as colunas do grid de 12 */
+@media (min-width: 1024px){
+  .hero .container,
+  .iniciativa{ column-gap: var(--space-8); }
+  .pilar{ padding-block: var(--space-7); }
+}
+
+/* 5) Telas panorâmicas / widescreen (a partir de 1440px): amplia a área útil máxima do grid */
+@media (min-width: 1440px){
+  :root{ --largura-max: 1360px; }
+  .hero__figura svg{ max-width: 380px; margin-inline: auto; }
+}
+
