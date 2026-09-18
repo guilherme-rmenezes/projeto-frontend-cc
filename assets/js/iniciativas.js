@@ -1,14 +1,7 @@
 // Instituto Semear: geração dinâmica dos cartões de iniciativa via templates JS
 //
-// Em vez de repetir a marcação de cada iniciativa manualmente no HTML, os
-// dados ficam centralizados no array abaixo e a marcação é gerada em tempo
-// de execução com Template Literals + Array.prototype.map(), depois
-// injetada de uma vez via innerHTML. Adicionar uma nova iniciativa no
-// futuro passa a ser só um novo objeto no array, sem tocar em HTML.
-//
-// Exposta como window.inicializarIniciativas pelo mesmo motivo do
-// cadastro.js: no modo SPA (ver router.js), este container pode ser
-// injetado no DOM depois que o DOMContentLoaded original já disparou.
+// Módulo ES6: exporta inicializarIniciativas() para ser importado pelo
+// router.js no modo SPA, pelo mesmo motivo do cadastro.js.
 
 var dadosIniciativas = [
   {
@@ -107,11 +100,10 @@ function gerarCartaoIniciativa(item) {
   `;
 }
 
-function inicializarIniciativas() {
+export function inicializarIniciativas() {
   var container = document.getElementById("lista-iniciativas");
   if (!container) return;
   container.innerHTML = dadosIniciativas.map(gerarCartaoIniciativa).join("");
 }
 
-window.inicializarIniciativas = inicializarIniciativas;
 document.addEventListener("DOMContentLoaded", inicializarIniciativas);

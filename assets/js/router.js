@@ -18,6 +18,15 @@
 // projetos.html e cadastro.html continuam funcionando normalmente também
 // como páginas avulsas (acesso direto, compartilhamento de link, uso sem
 // JavaScript), sem nenhuma duplicação de conteúdo entre os dois modos.
+//
+// Módulo ES6: importa diretamente as funções de inicialização das páginas
+// que a SPA injeta dinamicamente, em vez de expô-las como globais em
+// window. O import cria a dependência explícita, e o próprio navegador
+// garante que cadastro.js e iniciativas.js só são baixados e avaliados
+// uma única vez, mesmo sendo também carregados como entrada própria em
+// cadastro.html e projetos.html quando abertos isoladamente.
+import { inicializarCadastro } from "./cadastro.js";
+import { inicializarIniciativas } from "./iniciativas.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   var app = document.getElementById("app");
@@ -98,11 +107,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Reinicializa scripts específicos da página recém-injetada
-    if (arquivo === "cadastro.html" && typeof window.inicializarCadastro === "function") {
-      window.inicializarCadastro();
+    if (arquivo === "cadastro.html") {
+      inicializarCadastro();
     }
-    if (arquivo === "projetos.html" && typeof window.inicializarIniciativas === "function") {
-      window.inicializarIniciativas();
+    if (arquivo === "projetos.html") {
+      inicializarIniciativas();
     }
   }
 

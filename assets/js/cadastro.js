@@ -1,11 +1,10 @@
 // Instituto Semear: máscaras de entrada e validação do formulário de cadastro
 //
-// Exposta como window.inicializarCadastro porque, no modo SPA (ver router.js),
-// este formulário pode ser injetado dinamicamente no DOM depois que o evento
-// DOMContentLoaded já disparou; o roteador chama esta função manualmente
-// nesse caso. Quando cadastro.html é aberto isoladamente (fora da SPA), o
-// próprio DOMContentLoaded abaixo garante o comportamento de sempre.
-function inicializarCadastro() {
+// Módulo ES6: exporta inicializarCadastro() para ser importado pelo
+// router.js no modo SPA. Quando cadastro.html é aberto isoladamente (fora
+// da SPA), o próprio listener de DOMContentLoaded no fim deste arquivo
+// garante o comportamento de sempre, sem depender de import nenhum.
+export function inicializarCadastro() {
   var formulario = document.getElementById("formulario-voluntario");
   if (!formulario) return;
 
@@ -367,5 +366,4 @@ function inicializarCadastro() {
   }
 }
 
-window.inicializarCadastro = inicializarCadastro;
 document.addEventListener("DOMContentLoaded", inicializarCadastro);
