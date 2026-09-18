@@ -90,6 +90,13 @@ document.addEventListener("DOMContentLoaded", function () {
     marcarLinkAtivo(caminho);
     app.scrollIntoView({ behavior: "instant", block: "start" });
 
+    // O AOS escaneia o DOM na inicialização; como a SPA troca o conteúdo
+    // de #app depois disso, é preciso pedir que ele reavalie os elementos
+    // com data-aos recém-injetados.
+    if (window.AOS && typeof window.AOS.refreshHard === "function") {
+      window.AOS.refreshHard();
+    }
+
     // Reinicializa scripts específicos da página recém-injetada
     if (arquivo === "cadastro.html" && typeof window.inicializarCadastro === "function") {
       window.inicializarCadastro();

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="assets/vendor/aos/aos.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -44,7 +45,7 @@
     <!-- HERO -->
     <section class="hero" aria-labelledby="titulo-hero">
       <div class="container">
-        <div class="hero__texto">
+        <div class="hero__texto" data-aos="fade-right">
           <p class="hero__eyebrow">Instituto Semear</p>
           <h1 id="titulo-hero">Onde há terra,<br>plantamos <em>futuro</em>.</h1>
           <p>Há 12 anos cultivamos segurança alimentar, educação e oportunidades em comunidades do Rio Grande do Sul: uma família, uma horta e um ofício de cada vez.</p>
@@ -54,7 +55,7 @@
           </div>
         </div>
 
-        <div class="hero__figura" aria-hidden="true">
+        <div class="hero__figura" aria-hidden="true" data-aos="fade-left" data-aos-delay="150">
           <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
             <circle cx="160" cy="160" r="150" fill="#234A37"/>
             <path d="M160 250 C160 190 160 150 160 120" stroke="#E4C878" stroke-width="6" stroke-linecap="round" fill="none"/>
@@ -97,7 +98,7 @@
           <p>Trabalhamos onde a comunidade nos chama: na mesa, na sala de aula e no ofício que sustenta uma família. Cada frente é pensada para gerar autonomia, não dependência.</p>
         </div>
 
-        <ul class="pilares">
+        <ul class="pilares" data-aos="fade-up">
           <li class="pilar">
             <span class="pilar__marca">01</span>
             <div>
@@ -125,7 +126,7 @@
 
     <!-- DEPOIMENTO -->
     <section class="depoimento" aria-label="Depoimento">
-      <div class="container">
+      <div class="container" data-aos="fade-up">
         <blockquote>
           <p>&ldquo;A horta que o Instituto ajudou a plantar no nosso bairro virou o lugar onde as crianças aprendem, comem e sonham junto com os pais.&rdquo;</p>
           <footer>Marlene, moradora da comunidade Vila Esperança</footer>
@@ -171,6 +172,7 @@
     </div>
   </footer>
 
+  <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/cadastro.js"></script>
   <script src="assets/js/iniciativas.js"></script>

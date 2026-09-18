@@ -25,4 +25,20 @@ document.addEventListener("DOMContentLoaded", function () {
   if (anoAlvo) {
     anoAlvo.textContent = new Date().getFullYear();
   }
+
+  // Animações de entrada ao rolar a página (biblioteca AOS, hospedada
+  // localmente em assets/vendor/aos/). Desativada quando a pessoa tem a
+  // preferência do sistema "reduzir movimento" ativada, respeitando a
+  // mesma regra de acessibilidade já aplicada via CSS em prefers-reduced-motion.
+  if (window.AOS) {
+    window.AOS.init({
+      duration: 500,
+      easing: "ease-out",
+      once: true,
+      offset: 60,
+      disable: function () {
+        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      }
+    });
+  }
 });
