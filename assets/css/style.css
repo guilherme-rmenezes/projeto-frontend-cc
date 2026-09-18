@@ -1,27 +1,53 @@
 /* =========================================================
-   Instituto Semear: folha de estilos
-   Tokens: verde-mata / verde-musgo / areia / dourado / tinta
+   Instituto Semear: folha de estilos / Design System
+   Cores: verde-mata / verde-musgo / dourado / areia / tinta
    Tipografia: Fraunces (display) + Work Sans (texto/UI)
+   Espaçamento: escala modular de base 4px (razão ~1,5)
    ========================================================= */
 
 :root{
+  /* ---- Cores primárias (identidade da marca) ---- */
   --verde-mata:   #1B3A2B;
   --verde-mata-80:#234A37;
   --verde-musgo:  #4A6741;
   --verde-claro:  #7C9473;
-  --areia:        #EDE6D6;
-  --areia-clara:  #F6F2E8;
+
+  /* ---- Cores secundárias (destaque / chamada à ação) ---- */
   --dourado:      #C79A2B;
   --dourado-claro:#E4C878;
+
+  /* ---- Cores neutras (base, texto, superfícies) ---- */
+  --areia:        #EDE6D6;
+  --areia-clara:  #F6F2E8;
   --tinta:        #1B1A16;
   --tinta-suave:  #4B4A42;
   --branco:       #FFFFFF;
-  --erro:         #A23B2E;
-  --sucesso:      #3B6B3E;
   --borda:        #D8CFB8;
 
+  /* ---- Cores de feedback (estado de formulário) ---- */
+  --erro:         #A23B2E;
+  --sucesso:      #3B6B3E;
+
+  /* ---- Tipografia: famílias ---- */
   --fonte-display: "Fraunces", "Iowan Old Style", Georgia, serif;
   --fonte-texto:   "Work Sans", "Segoe UI", sans-serif;
+
+  /* ---- Tipografia: escala hierárquica (5 patamares) ---- */
+  --fs-100: 0.85rem;                          /* legendas, ajuda de campo */
+  --fs-200: 1rem;                             /* corpo de texto (base)   */
+  --fs-300: 1.35rem;                          /* h3 / subtítulo          */
+  --fs-400: clamp(1.9rem, 3.4vw, 2.7rem);     /* h2 / título de seção    */
+  --fs-500: clamp(2.4rem, 5vw, 4.2rem);       /* h1 / título principal   */
+
+  /* ---- Espaçamento: escala modular (base 4px) ---- */
+  --space-1: 0.25rem;   /* 4px  */
+  --space-2: 0.5rem;    /* 8px  */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-7: 3rem;      /* 48px */
+  --space-8: 4rem;      /* 64px */
 
   --largura-max: 1180px;
   --raio: 3px;
@@ -45,6 +71,7 @@ html{ scroll-behavior: smooth; }
 body{
   margin: 0;
   font-family: var(--fonte-texto);
+  font-size: var(--fs-200);
   color: var(--tinta);
   background: var(--areia-clara);
   line-height: 1.55;
@@ -63,9 +90,9 @@ h1, h2, h3, h4{
   color: var(--verde-mata);
 }
 
-h1{ font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 500; }
-h2{ font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
-h3{ font-size: 1.35rem; }
+h1{ font-size: var(--fs-500); font-weight: 500; }
+h2{ font-size: var(--fs-400); }
+h3{ font-size: var(--fs-300); }
 
 p{ margin: 0 0 1em; max-width: 62ch; }
 
@@ -241,8 +268,8 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .hero__acoes{
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.75rem;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }
 
 .hero__figura{ position: relative; }
@@ -280,7 +307,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .secao__cabecalho{
   max-width: 60ch;
-  margin-bottom: 2.75rem;
+  margin-bottom: var(--space-7);
 }
 .secao__cabecalho p{ color: var(--tinta-suave); }
 
@@ -297,7 +324,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   display: grid;
   grid-template-columns: 5rem 1fr;
   gap: 1.5rem;
-  padding-block: 2.1rem;
+  padding-block: var(--space-6);
   border-bottom: 1px solid var(--borda);
 }
 
@@ -418,8 +445,8 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .rodape a:hover{ color: var(--dourado-claro); }
 .rodape__base{
   border-top: 1px solid #3A382F;
-  padding-block: 1.25rem;
-  font-size: 0.85rem;
+  padding-block: var(--space-5);
+  font-size: var(--fs-100);
   color: #7E7B70;
   text-align: center;
 }
@@ -447,7 +474,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .formulario-envolvimento fieldset{
   border: none;
   padding: 0;
-  margin: 0 0 2.75rem;
+  margin: 0 0 var(--space-7);
 }
 
 .formulario-envolvimento legend{
@@ -455,25 +482,25 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   font-size: 1.35rem;
   color: var(--verde-mata);
   padding: 0 0 0.4rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: var(--space-5);
   border-bottom: 2px solid var(--dourado);
   width: 100%;
 }
 
 .campo{
-  margin-bottom: 1.4rem;
+  margin-bottom: var(--space-5);
 }
 
 .campo--dupla{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: var(--space-5);
 }
 
 .campo--tripla{
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 1.25rem;
+  gap: var(--space-5);
 }
 
 .campo label{
@@ -487,7 +514,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .campo .opcional{
   font-weight: 400;
   color: var(--tinta-suave);
-  font-size: 0.85rem;
+  font-size: var(--fs-100);
 }
 
 .campo input,
@@ -525,15 +552,15 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 }
 
 .campo__ajuda{
-  font-size: 0.83rem;
+  font-size: var(--fs-100);
   color: var(--tinta-suave);
-  margin-top: 0.35rem;
+  margin-top: var(--space-2);
 }
 
 .campo__erro{
-  font-size: 0.83rem;
+  font-size: var(--fs-100);
   color: var(--erro);
-  margin-top: 0.35rem;
+  margin-top: var(--space-2);
   display: none;
   font-weight: 600;
 }
@@ -541,9 +568,9 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .campo--invalido .campo__erro{ display: block; }
 
 .campo__ok{
-  font-size: 0.83rem;
+  font-size: var(--fs-100);
   color: var(--sucesso);
-  margin-top: 0.35rem;
+  margin-top: var(--space-2);
   display: none;
   font-weight: 600;
 }
@@ -553,7 +580,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .grupo-checkbox{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.7rem 1.25rem;
+  gap: var(--space-3) var(--space-5);
 }
 .opcao-checkbox{
   display: flex;
