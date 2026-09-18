@@ -70,9 +70,20 @@ document.addEventListener("DOMContentLoaded", function () {
     if (linkAtivo) linkAtivo.setAttribute("aria-current", "page");
   }
 
+  var tokenNavegacaoAtual = 0;
+
   async function renderizarRota() {
     var caminho = caminhoAtual();
     var arquivo = rotas[caminho];
+
+    // Token de requisição: se, enquanto este fetch está em voo, uma nova
+    // navegação começar (a pessoa clicou de novo antes da resposta
+    // anterior chegar), tokenNavegacaoAtual muda e esta chamada descarta
+    // seu próprio resultado ao perceber que não é mais a mais recente.
+    // Sem isso, uma rota mais lenta clicada primeiro pode responder depois
+    // de uma mais rápida clicada em seguida e sobrescrever o conteúdo
+    // errado por cima (condição de corrida real, encontrada em testes).
+    var meuToken = ++tokenNavegacaoAtual;
 
     // Na primeiríssima carga, se a rota for a home, o conteúdo já está
     // presente no HTML original (progressive enhancement / SEO); evita
@@ -83,15 +94,21 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         var resposta = await fetch(arquivo, { cache: "no-store" });
         var textoHtml = await resposta.text();
+
+        if (meuToken !== tokenNavegacaoAtual) return; // resposta obsoleta: uma navegação mais nova já está em andamento
+
         var doc = new DOMParser().parseFromString(textoHtml, "text/html");
         var novoMain = doc.querySelector("main");
         if (novoMain) app.innerHTML = novoMain.innerHTML;
         var novoTitulo = doc.querySelector("title");
         if (novoTitulo) document.title = novoTitulo.textContent;
       } catch (erro) {
+        if (meuToken !== tokenNavegacaoAtual) return;
         app.innerHTML = "<p style=\"padding:2rem;\">Não foi possível carregar esta página.</p>";
       }
     }
+
+    if (meuToken !== tokenNavegacaoAtual) return; // guarda também o caminho sem fetch (home na primeira carga)
 
     primeiraExecucao = false;
 
