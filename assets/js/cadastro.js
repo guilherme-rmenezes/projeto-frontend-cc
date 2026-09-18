@@ -209,16 +209,37 @@ document.addEventListener("DOMContentLoaded", function () {
     // Formulário válido: em produção, aqui seria feito o envio (fetch/XHR)
     // para o backend da ONG. Nesta demonstração, exibimos a confirmação.
     if (mensagemEnvio) {
-      mensagemEnvio.textContent = "Cadastro enviado com sucesso! Em breve nossa equipe entrará em contato para os próximos passos.";
+      var toastTexto = document.getElementById("toast-texto");
+      if (toastTexto) toastTexto.textContent = "Cadastro enviado com sucesso! Em breve nossa equipe entrará em contato para os próximos passos.";
       mensagemEnvio.classList.add("visivel");
-      mensagemEnvio.setAttribute("tabindex", "-1");
-      mensagemEnvio.focus();
     }
     formulario.reset();
     formulario.querySelectorAll(".campo--valido, .campo--invalido").forEach(function (envoltorio) {
       envoltorio.classList.remove("campo--valido", "campo--invalido");
     });
   });
+
+  // Botão de fechar do toast
+  var toastFechar = document.getElementById("toast-fechar");
+  if (toastFechar && mensagemEnvio) {
+    toastFechar.addEventListener("click", function () {
+      mensagemEnvio.classList.remove("visivel");
+    });
+  }
+
+  // Fecha o toast automaticamente após alguns segundos
+  if (mensagemEnvio) {
+    var temporizadorToast = null;
+    var observadorToast = new MutationObserver(function () {
+      if (mensagemEnvio.classList.contains("visivel")) {
+        clearTimeout(temporizadorToast);
+        temporizadorToast = setTimeout(function () {
+          mensagemEnvio.classList.remove("visivel");
+        }, 6000);
+      }
+    });
+    observadorToast.observe(mensagemEnvio, { attributes: true, attributeFilter: ["class"] });
+  }
 
   // Remove o estado de erro assim que a pessoa começa a corrigir o campo
   formulario.querySelectorAll("input, select, textarea").forEach(function (campo) {
@@ -229,4 +250,20 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  /* ----------------------------------------------------------
+     Gatilho de demonstração (uso interno, só para capturas de
+     tela dos estados de UI: ?demo=toast ou ?demo=erro na URL).
+     Não faz parte do fluxo normal de uso do formulário.
+  ---------------------------------------------------------- */
+  var parametroDemo = new URLSearchParams(window.location.search).get("demo");
+  if (parametroDemo === "toast" && mensagemEnvio) {
+    var toastTextoDemo = document.getElementById("toast-texto");
+    if (toastTextoDemo) toastTextoDemo.textContent = "Cadastro enviado com sucesso! Em breve nossa equipe entrará em contato para os próximos passos.";
+    mensagemEnvio.classList.add("visivel");
+  }
+  if (parametroDemo === "erro" && campoCPF) {
+    campoCPF.value = "123.456.789-00";
+    marcarInvalido(campoCPF, "CPF inválido. Confira os números digitados.");
+  }
 });

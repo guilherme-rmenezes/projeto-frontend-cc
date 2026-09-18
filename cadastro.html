@@ -48,6 +48,13 @@
     </section>
 
     <section class="secao" style="padding-top:0;">
+      <div style="max-width:760px; margin-inline:auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem);">
+        <div class="alerta alerta--info" role="note">
+          <span class="alerta__icone" aria-hidden="true">ℹ</span>
+          <p>Seus dados pessoais são usados apenas para contato do Instituto Semear e nunca são compartilhados com terceiros, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+        </div>
+      </div>
+
       <form class="formulario-envolvimento" id="formulario-voluntario" novalidate autocomplete="on">
 
         <!-- DADOS PESSOAIS -->
@@ -274,7 +281,11 @@
 
         <button type="submit" class="botao botao--principal">Enviar cadastro</button>
 
-        <p class="mensagem-envio" id="mensagem-envio" role="status"></p>
+        <div class="toast" id="mensagem-envio" role="status" aria-live="polite">
+          <span class="toast__icone" aria-hidden="true">✓</span>
+          <p class="toast__texto" id="toast-texto"></p>
+          <button type="button" class="toast__fechar" id="toast-fechar" aria-label="Fechar aviso">×</button>
+        </div>
       </form>
     </section>
 
