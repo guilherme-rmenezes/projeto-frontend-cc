@@ -1,5 +1,11 @@
 // Instituto Semear: máscaras de entrada e validação do formulário de cadastro
-document.addEventListener("DOMContentLoaded", function () {
+//
+// Exposta como window.inicializarCadastro porque, no modo SPA (ver router.js),
+// este formulário pode ser injetado dinamicamente no DOM depois que o evento
+// DOMContentLoaded já disparou; o roteador chama esta função manualmente
+// nesse caso. Quando cadastro.html é aberto isoladamente (fora da SPA), o
+// próprio DOMContentLoaded abaixo garante o comportamento de sempre.
+function inicializarCadastro() {
   var formulario = document.getElementById("formulario-voluntario");
   if (!formulario) return;
 
@@ -266,4 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     campoCPF.value = "123.456.789-00";
     marcarInvalido(campoCPF, "CPF inválido. Confira os números digitados.");
   }
-});
+}
+
+window.inicializarCadastro = inicializarCadastro;
+document.addEventListener("DOMContentLoaded", inicializarCadastro);

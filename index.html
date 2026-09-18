@@ -17,7 +17,7 @@
 
   <header class="cabecalho">
     <div class="container barra-nav">
-      <a class="marca" href="index.html">
+      <a class="marca" href="#/">
         <span class="marca__semente" aria-hidden="true">🌱</span>
         <span class="marca__nome">Instituto <em>Semear</em></span>
       </a>
@@ -28,17 +28,18 @@
 
       <nav class="nav-principal" id="nav-principal" aria-label="Navegação principal">
         <ul>
-          <li><a href="index.html" aria-current="page">Início</a></li>
-          <li><a href="projetos.html">Iniciativas</a></li>
-          <li><a href="cadastro.html">Seja voluntário</a></li>
+          <li><a href="#/" aria-current="page">Início</a></li>
+          <li><a href="#/projetos">Iniciativas</a></li>
+          <li><a href="#/cadastro">Seja voluntário</a></li>
         </ul>
       </nav>
 
-      <a class="botao botao--dourado" href="cadastro.html">Quero ajudar</a>
+      <a class="botao botao--dourado" href="#/cadastro">Quero ajudar</a>
     </div>
   </header>
 
   <main id="conteudo-principal">
+    <div id="app">
 
     <!-- HERO -->
     <section class="hero" aria-labelledby="titulo-hero">
@@ -48,8 +49,8 @@
           <h1 id="titulo-hero">Onde há terra,<br>plantamos <em>futuro</em>.</h1>
           <p>Há 12 anos cultivamos segurança alimentar, educação e oportunidades em comunidades do Rio Grande do Sul: uma família, uma horta e um ofício de cada vez.</p>
           <div class="hero__acoes">
-            <a class="botao botao--dourado" href="cadastro.html">Quero ser voluntário</a>
-            <a class="botao botao--contorno" href="projetos.html" style="border-color:#D9E0D4; color:#EDE6D6;">Conhecer as iniciativas</a>
+            <a class="botao botao--dourado" href="#/cadastro">Quero ser voluntário</a>
+            <a class="botao botao--contorno" href="#/projetos" style="border-color:#D9E0D4; color:#EDE6D6;">Conhecer as iniciativas</a>
           </div>
         </div>
 
@@ -136,10 +137,11 @@
     <section class="chamada-final">
       <div class="container">
         <h2>Falta uma mão: pode ser a sua.</h2>
-        <a class="botao botao--principal" href="cadastro.html">Fazer meu cadastro</a>
+        <a class="botao botao--principal" href="#/cadastro">Fazer meu cadastro</a>
       </div>
     </section>
 
+    </div>
   </main>
 
   <footer class="rodape">
@@ -151,9 +153,9 @@
       <div>
         <h4>Navegação</h4>
         <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="projetos.html">Iniciativas</a></li>
-          <li><a href="cadastro.html">Seja voluntário</a></li>
+          <li><a href="#/">Início</a></li>
+          <li><a href="#/projetos">Iniciativas</a></li>
+          <li><a href="#/cadastro">Seja voluntário</a></li>
         </ul>
       </div>
       <div>
@@ -170,5 +172,7 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/cadastro.js"></script>
+  <script src="assets/js/router.js"></script>
 </body>
 </html>
