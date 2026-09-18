@@ -94,6 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (arquivo === "cadastro.html" && typeof window.inicializarCadastro === "function") {
       window.inicializarCadastro();
     }
+    if (arquivo === "projetos.html" && typeof window.inicializarIniciativas === "function") {
+      window.inicializarIniciativas();
+    }
   }
 
   window.addEventListener("hashchange", renderizarRota);
