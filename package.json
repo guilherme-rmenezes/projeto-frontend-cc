@@ -1,0 +1,14 @@
+{
+  "name": "instituto-semear",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Build de producao opcional (minificacao) para o site do Instituto Semear",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "devDependencies": {
+    "clean-css": "5.3.3",
+    "html-minifier-terser": "7.2.0",
+    "terser": "5.51.2"
+  }
+}
