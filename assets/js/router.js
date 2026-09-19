@@ -116,6 +116,16 @@ document.addEventListener("DOMContentLoaded", function () {
     marcarLinkAtivo(caminho);
     app.scrollIntoView({ behavior: "instant", block: "start" });
 
+    // Move o foco de teclado para o início do conteúdo recém-carregado.
+    // Sem isso, o foco continua no link que acabou de ser clicado e nem
+    // leitores de tela nem navegação por Tab percebem que a "página"
+    // mudou (rolar a tela sozinho não move o foco nem é anunciado).
+    // Foca o h1 da nova rota quando existe (assim o título é verbalizado
+    // pelo leitor de tela); cai para o próprio #app como alternativa.
+    var alvoFoco = app.querySelector("h1") || app;
+    if (!alvoFoco.hasAttribute("tabindex")) alvoFoco.setAttribute("tabindex", "-1");
+    alvoFoco.focus({ preventScroll: true });
+
     // O AOS escaneia o DOM na inicialização; como a SPA troca o conteúdo
     // de #app depois disso, é preciso pedir que ele reavalie os elementos
     // com data-aos recém-injetados.
