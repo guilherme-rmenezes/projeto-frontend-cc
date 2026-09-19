@@ -24,6 +24,17 @@
   --branco:       #FFFFFF;
   --borda:        #D8CFB8;
 
+  /* ---- Cor de título: separada de --verde-mata para poder variar
+     independentemente no modo escuro, sem afetar onde verde-mata é usado
+     como fundo sólido (hero, botão principal etc.) ---- */
+  --titulo: var(--verde-mata);
+
+  /* ---- Texto fixo e claro: para texto sobre fundos sólidos escuros
+     (hero, botão principal, depoimento, rodapé) que já são escuros nos
+     dois temas e por isso NÃO devem seguir a inversão de --areia-clara/
+     --branco no modo escuro ---- */
+  --claro-fixo: #F6F2E8;
+
   /* ---- Cores de feedback (estado de formulário) ---- */
   --erro:         #A23B2E;
   --sucesso:      #3B6B3E;
@@ -52,6 +63,32 @@
   --largura-max: 1180px;
   --raio: 3px;
   --transicao: 180ms ease;
+}
+
+/* =========================================================
+   Modo escuro: segue a preferência do sistema operacional
+   (prefers-color-scheme), sem exigir um botão de alternância.
+   Paleta calculada com a fórmula de contraste do WCAG (razão
+   luminância relativa) para manter AA (4.5:1) em texto normal:
+     titulo   #9ED4AC sobre #14201A → 9.96:1
+     texto    #EDEAE2 sobre #14201A → 13.96:1
+     erro     #F08A78 sobre #1C2B22 → 6.07:1
+     sucesso  #8FD4A0 sobre #1C2B22 → 8.53:1
+   --claro-fixo e as cores usadas como fundo sólido (verde-mata,
+   dourado, tinta) permanecem iguais nos dois temas de propósito:
+   ========================================================= */
+@media (prefers-color-scheme: dark){
+  :root{
+    --areia:        #1C2B22;
+    --areia-clara:  #14201A;
+    --tinta:        #EDEAE2;
+    --tinta-suave:  #D8D3C7;
+    --branco:       #1C2B22;
+    --borda:        #3A4A3E;
+    --titulo:       #9ED4AC;
+    --erro:         #F08A78;
+    --sucesso:      #8FD4A0;
+  }
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
@@ -87,7 +124,7 @@ h1, h2, h3, h4{
   font-weight: 600;
   line-height: 1.12;
   margin: 0 0 0.5em;
-  color: var(--verde-mata);
+  color: var(--titulo);
 }
 
 h1{ font-size: var(--fs-500); font-weight: 500; }
@@ -143,7 +180,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   gap: 0.55rem;
   text-decoration: none;
   font-family: var(--fonte-display);
-  color: var(--verde-mata);
+  color: var(--titulo);
 }
 .marca__semente{ font-size: 1.5rem; }
 .marca__nome{ font-size: 1.28rem; font-weight: 600; letter-spacing: 0.01em; }
@@ -196,7 +233,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 }
 .nav-principal a:hover,
 .nav-principal a[aria-current="page"]{
-  color: var(--verde-mata);
+  color: var(--titulo);
   border-color: var(--dourado);
 }
 
@@ -215,7 +252,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 }
 .botao--principal{
   background: var(--verde-mata);
-  color: var(--areia-clara);
+  color: var(--claro-fixo);
 }
 .botao--principal:hover:not(:disabled){ background: var(--verde-mata-80); }
 .botao--dourado{
@@ -225,10 +262,10 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .botao--dourado:hover:not(:disabled){ background: var(--dourado-claro); }
 .botao--contorno{
   background: transparent;
-  border-color: var(--verde-mata);
-  color: var(--verde-mata);
+  border-color: var(--titulo);
+  color: var(--titulo);
 }
-.botao--contorno:hover:not(:disabled){ background: var(--verde-mata); color: var(--areia-clara); }
+.botao--contorno:hover:not(:disabled){ background: var(--verde-mata); color: var(--claro-fixo); }
 .botao:active:not(:disabled){ transform: translateY(1px); }
 .botao:disabled{
   opacity: 0.5;
@@ -240,7 +277,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .hero{
   position: relative;
   background: var(--verde-mata);
-  color: var(--areia-clara);
+  color: var(--claro-fixo);
   overflow: hidden;
 }
 
@@ -262,7 +299,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   margin-bottom: 0.9rem;
 }
 
-.hero h1{ color: var(--branco); }
+.hero h1{ color: var(--claro-fixo); }
 .hero h1 em{ color: var(--dourado-claro); font-style: italic; }
 
 .hero p{
@@ -297,7 +334,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .estatistica__numero{
   font-family: var(--fonte-display);
   font-size: clamp(2.2rem, 4vw, 3rem);
-  color: var(--verde-mata);
+  color: var(--titulo);
   display: block;
 }
 .estatistica__rotulo{
@@ -401,7 +438,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .depoimento{
   background: var(--verde-mata);
-  color: var(--areia-clara);
+  color: var(--claro-fixo);
 }
 .depoimento .container{ padding-block: clamp(3rem, 6vw, 5rem); max-width: 900px; }
 .depoimento blockquote{
@@ -409,7 +446,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
   font-size: clamp(1.4rem, 2.6vw, 1.9rem);
   font-style: italic;
   margin: 0 0 1.25rem;
-  color: var(--branco);
+  color: var(--claro-fixo);
 }
 .depoimento footer{
   font-style: normal;
@@ -448,7 +485,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .rodape .container > div:nth-child(1){ grid-column: span 5; }
 .rodape .container > div:nth-child(2){ grid-column: span 4; }
 .rodape .container > div:nth-child(3){ grid-column: span 3; }
-.rodape h4{ color: var(--areia-clara); font-family: var(--fonte-texto); font-size: 0.95rem; text-transform: none; margin-bottom: 0.9rem; }
+.rodape h4{ color: var(--claro-fixo); font-family: var(--fonte-texto); font-size: 0.95rem; text-transform: none; margin-bottom: 0.9rem; }
 .rodape p{ color: #A6A398; font-size: 0.92rem; }
 .rodape ul{ list-style: none; margin: 0; padding: 0; }
 .rodape li{ margin-bottom: 0.55rem; }
@@ -468,7 +505,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 
 .pagina-cadastro-hero{
   background: var(--verde-mata);
-  color: var(--areia-clara);
+  color: var(--claro-fixo);
 }
 .pagina-cadastro-hero .container{
   padding-block: clamp(2.75rem, 6vw, 4rem);
@@ -491,7 +528,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .formulario-envolvimento legend{
   font-family: var(--fonte-display);
   font-size: 1.35rem;
-  color: var(--verde-mata);
+  color: var(--titulo);
   padding: 0 0 0.4rem;
   margin-bottom: var(--space-5);
   border-bottom: 2px solid var(--dourado);
@@ -551,7 +588,7 @@ p{ margin: 0 0 1em; max-width: 62ch; }
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus{
-  border-color: var(--verde-mata);
+  border-color: var(--titulo);
   box-shadow: 0 0 0 3px rgba(27,58,43,0.14);
   outline: none;
 }
